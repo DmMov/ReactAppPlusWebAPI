@@ -1,0 +1,42 @@
+@import 'vars.scss';
+
+.product-form {
+    // display: grid;
+    display: none;
+    grid-template-rows: repeat(3, 1fr);
+    grid-gap: $gap;
+    position: fixed;
+    top: 30vh;
+    left: 40vw;
+    width: 20vw;
+    box-shadow: $shad;
+    border-radius: 2px;
+    padding: $gap;
+
+    .field {
+        border: none;
+        padding: $gap;
+        font-size: 1em;
+        font-style: italic;
+        color: #aaa;
+        border-bottom: 3px solid #a9a9a9;
+
+        &:focus {
+            font-style: normal;
+            color: #a9a9a9;
+            border-color: $accent;
+        }
+    }
+
+    .sub-btn {
+        border: none;
+        background-color: $accent;
+        border-radius: 2px;
+        color: white;
+        transition: all .25s ease;
+
+        &:hover {
+            background-color: darken($accent, 5%);
+        }
+    }
+}
