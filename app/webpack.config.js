@@ -20,7 +20,7 @@ const config = {
     output: {
         filename: 'Js/[name].js',
         path: path.resolve(__dirname, 'dist'),
-        publicPath: 'dist/'
+        publicPath: '/'
     },
     resolve: {
         extensions: [ '.js', '.jsx', '.json', '.jpg', '.css', '.scss' ]
@@ -97,7 +97,9 @@ const config = {
     },
     devtool: 'source-map',
     devServer: {
-        overlay: true
+        overlay: true,
+        contentBase: './dist',
+        historyApiFallback: true,
     },
     
     plugins:[

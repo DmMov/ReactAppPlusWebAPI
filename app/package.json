@@ -7,6 +7,7 @@
     "dev": "webpack --mode development",
     "prod": "webpack --mode production",
     "watch": "webpack --mode development --watch",
+    "start": "webpack-dev-server --mode development --open",
     "inst": "npm i react react-dom react-router-dom prop-types",
     "instDev": "npm i -D webpack webpack-cli @babel/core @babel/cli babel-loader @babel/polyfill @babel/preset-env @babel/preset-react node-sass sass-loader postcss-loader css-loader style-loader file-loader img-loader svg-url-loader clean-webpack-plugin copy-webpack-plugin extract-text-webpack-plugin@next imagemin-webpack-plugin"
   },

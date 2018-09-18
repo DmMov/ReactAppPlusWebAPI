@@ -33,19 +33,23 @@ namespace api
             services.AddIdentity<User, IdentityRole>().
                 AddEntityFrameworkStores<ApplicationContext>();
 
+            services.AddCors();
+
             services.AddMvc();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             //app.UseStatusCodePagesWithRedirects("/");
-
+            
             app.UseAuthentication();
 
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
 
             app.UseStaticFiles();
 
