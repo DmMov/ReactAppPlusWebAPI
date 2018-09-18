@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
-using ReactJsPlusASP.NetCoreWebAPI.Models;
+using api.Models;
 
 namespace api.Controllers
 {

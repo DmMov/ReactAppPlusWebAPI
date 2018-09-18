@@ -29,6 +29,8 @@ namespace api
         {
             services.AddDbContext<ApplicationContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<ProductsContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("ProductsConnection")));
 
             services.AddIdentity<User, IdentityRole>().
                 AddEntityFrameworkStores<ApplicationContext>();
