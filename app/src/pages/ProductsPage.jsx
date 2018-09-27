@@ -27,7 +27,6 @@ class ProductsPage extends Component {
         let xhr = new XMLHttpRequest();
 
         xhr.open('get', 'https://localhost:44307/api/products', true);
-        xhr.setRequestHeader('Access-Control-Allow-Headers', '*');
         xhr.onload = () => {
             let data = JSON.parse(xhr.responseText);
             this.setState({products: data})
@@ -59,7 +58,7 @@ class ProductsPage extends Component {
     delPr = product => {
         if (product) 
         {
-            let url = 'https://localhost:44307/api/products' + product.id;
+            let url = 'https://localhost:44307/api/products/' + product.id;
              
             let xhr = new XMLHttpRequest();
             xhr.open("delete", url, true);

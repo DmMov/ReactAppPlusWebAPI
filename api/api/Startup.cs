@@ -13,6 +13,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using api.Models;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 
 namespace api
 {
@@ -35,6 +37,22 @@ namespace api
             services.AddIdentity<User, IdentityRole>().
                 AddEntityFrameworkStores<ApplicationContext>();
 
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                {
+                    options.RequireHttpsMetadata = true;
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuer = true,
+                        ValidIssuer = AuthOptions.ISSUER,
+                        ValidateAudience = true,
+                        ValidAudience = AuthOptions.AUDIENCE,
+                        ValidateLifetime = true,
+                        IssuerSigningKey = AuthOptions.GetSymmetricSecurityKey(),
+                        ValidateIssuerSigningKey = true,
+                    };
+                });
+
             services.AddCors();
 
             services.AddMvc();
@@ -44,7 +62,6 @@ namespace api
         {
             //app.UseStatusCodePagesWithRedirects("/");
             
-            app.UseAuthentication();
 
             if (env.IsDevelopment())
             {
@@ -54,6 +71,7 @@ namespace api
             app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
 
             app.UseStaticFiles();
+            app.UseAuthentication();
 
             app.UseMvc();
         }

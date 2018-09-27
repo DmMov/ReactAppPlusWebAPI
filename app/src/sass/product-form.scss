@@ -1,8 +1,8 @@
 @import 'vars.scss';
 
 .product-form {
-    // display: grid;
-    display: none;
+    display: grid;
+    // display: none;
     grid-template-rows: repeat(3, 1fr);
     grid-gap: $gap;
     position: fixed;

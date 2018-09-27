@@ -12,20 +12,23 @@ namespace api.Controllers
     [ApiController]
     public class ProductsController : Controller
     {
-        static readonly List<Product> data;
-        static ProductsController()
+        public ProductsContext db;
+
+        public ProductsController(ProductsContext context)
         {
-            data = new List<Product>
+            this.db = context;
+            if (!db.Products.Any())
             {
-                new Product {Id = Guid.NewGuid().ToString(), Name = "iPhone 7", Price = 52000},
-                new Product {Id = Guid.NewGuid().ToString(), Name = "iPhone 7", Price = 52000}
-            };
+                db.Products.Add(new Product { Id = Guid.NewGuid().ToString(), Name = "Some name", Price = 20000 });
+                db.Products.Add(new Product { Id = Guid.NewGuid().ToString(), Name = "Some name", Price = 20000 });
+                db.SaveChanges();
+            }
         }
 
         [HttpGet]
         public IEnumerable<Product> Get()
         {
-            return data;
+            return db.Products.ToList();
         }
 
         [HttpGet("{id}")]
@@ -38,7 +41,8 @@ namespace api.Controllers
         public IActionResult Post([FromBody]Product product)
         {
             product.Id = Guid.NewGuid().ToString();
-            data.Add(product);
+            db.Products.Add(product);
+            db.SaveChanges();
             return Ok(product);
         }
 
@@ -50,12 +54,13 @@ namespace api.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete(string id)
         {
-            Product product = data.FirstOrDefault(x => x.Id == id);
+            Product product = db.Products.FirstOrDefault(x => x.Id == id);
             if (product == null)
             {
                 return NotFound();
             }
-            data.Remove(product);
+            db.Products.Remove(product);
+            db.SaveChanges();
             return Ok(product);
         }
     }

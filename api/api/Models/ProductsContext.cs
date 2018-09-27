@@ -9,9 +9,10 @@ namespace api.Models
     public class ProductsContext : DbContext
     {
         public DbSet<Product> Products { get; set; }
-        public ProductsContext(DbContextOptions<ProductsContext> options)
+        public ProductsContext(DbContextOptions<ProductsContext> options) : base(options)
         {
             Database.EnsureCreated();
         }
+
     }
 }
